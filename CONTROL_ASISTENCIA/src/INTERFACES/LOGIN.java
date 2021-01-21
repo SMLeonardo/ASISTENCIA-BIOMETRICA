@@ -5,6 +5,9 @@
  */
 package INTERFACES;
 
+import CONTROLADOR.Conexion;
+import CONTROLADOR.IconError;
+import CONTROLADOR.MyIcon;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -25,7 +28,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 public class LOGIN extends javax.swing.JFrame {
-  private Timer tiempo;
+Conexion cc = new Conexion();
+private Timer tiempo;
 int cont; 
 char tipo;
 public final static int TWO_SECOND=1;
@@ -34,7 +38,8 @@ public final static int TWO_SECOND=1;
      */
     public LOGIN() {
         initComponents();
-       
+       setLocationRelativeTo(null);
+        usuario();
     }
 @Override
 public Image getIconImage() {
@@ -63,6 +68,7 @@ public Image getIconImage() {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
@@ -108,36 +114,44 @@ public Image getIconImage() {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/login1.png"))); // NOI18N
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnregistra, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(36, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(109, 109, 109))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnregistra, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(118, 118, 118)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +169,9 @@ public Image getIconImage() {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnregistra, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -178,19 +194,18 @@ public Image getIconImage() {
 
     private void btnregistraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistraActionPerformed
         // TODO add your handling code here:
-
+Ingreso_Usuarios usu=new Ingreso_Usuarios();
+                usu.setVisible(true);
+                this.dispose();
     }//GEN-LAST:event_btnregistraActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        //    IconError error=new IconError();
-        //    if(acceder()==1){
-
+       
             jProgressBar1.setVisible(true);
             cont=-1;
             jProgressBar1.setValue(0);
             jProgressBar1.setStringPainted(true);
-//            tiempo=new Timer(TWO_SECOND,new TimerListener());
+
 
 
 
@@ -238,12 +253,185 @@ public Image getIconImage() {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JProgressBar jProgressBar1;
     public static javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
  
+    class TimerListener implements ActionListener{
+    public void actionPerformed(ActionEvent e){
+     MyIcon icon = new MyIcon();IconError error=new IconError();
+        cont++;     
+      jProgressBar1.setValue(cont);
+      jLabel4.setText("Comprobando datos....");
+        if (cont==100) {
+       tiempo.stop();
+
+            if (acceder().equals("Administrador")) {
+              JOptionPane.showMessageDialog(null, "Has ingresado satisfactoriamente al sistema", "Bienvenido", JOptionPane.DEFAULT_OPTION, icon);
+         Principal principal = new Principal();  
+            principal.setVisible(true);       
+            
+//            Principal.Label2.setText(jTextField1.getText());
+            Captura("Administrador");
+            dispose();  
+            }else if(acceder().equals("Asistente de Ventas")){
+             JOptionPane.showMessageDialog(null, "Has ingresado satisfactoriamente al sistema", "Bienvenido", JOptionPane.DEFAULT_OPTION, icon);
+         Invitado invitado = new Invitado();  
+            invitado.setVisible(true);       
+            
+//            Principal.Label2.setText(jTextField1.getText());
+            Captura("Asistente de Ventas");
+            dispose();     
+            }else if(acceder().equals("")){
+                System.out.println(""+acceder());
+                JOptionPane.showMessageDialog(null, "Por favor ingrese un usuario y/o contraseña correctos", "Acceso denegado",
+         JOptionPane.DEFAULT_OPTION, error);
+                jProgressBar1.setValue(0);
+                jLabel4.setText("");
+            }
+        }
+    }    
+    }
+  public void activar(){ 
+        tiempo.start();   
+    }
     
+   public void usuario(){  
+String usuario; 
+String pass;
+        usuario=jTextField1.getText();
+        pass=new String(jPasswordField1.getPassword());
+    Connection cn = (Connection) cc.Conexion();
+         String sql="SELECT * FROM usuario ";
+        try {
+            Statement st = (Statement) cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+           
+ while(rs.next()){
+            
+            usuario=rs.getString(1);
+            
+        }
+//            System.out.println(""+usuario);
+            if (usuario.equals("")) {
+                btnregistra.setVisible(true);
+            }else if (!usuario.equals("")) {
+                btnregistra.setVisible(false);
+//               
+            }
+    
+        } catch (SQLException ex) {
+         JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);  
+            ///Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   } 
+    
+       public String acceder() {
+        int resultado=0;  String tipo=""; 
+String usuario; 
+String pass; IconError error=new IconError();MyIcon icon = new MyIcon();
+        usuario=jTextField1.getText();
+        pass=new String(jPasswordField1.getPassword());
+          Conexion cc = new Conexion();
+    Connection cn = (Connection) cc.Conexion();
+      
+
+       String sql="SELECT USU_usuario,USU_contraseña,USU_jerarquia FROM usuario where USU_estado='Activo'";
+        try {
+            Statement st = (Statement) cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+           
+ while(rs.next()){
+          ;  
+           
+          if (rs.getString("USU_usuario").equals(usuario)&& rs.getString("USU_contraseña").equals(pass)) {  
+//         resultado=1;
+         tipo=rs.getString("USU_jerarquia");
+     }
+            
+           
+        }
+   
+        } catch (SQLException ex) {
+         JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);  
+            ///Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+
+
+        try {
+
+            cn.close();
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, ex, "Error de desconexión", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+    }
+
+
+       return tipo;
+        }
+       public void Captura(String cat){
+ char t;
+           try {
+            
+            String ConsultaSQL="SELECT  USU_jerarquia,USU_empleado FROM usuario WHERE USU_usuario ='"+jTextField1.getText()+"'";
+       Connection cn = (Connection) cc.Conexion();  
+            String []registros= new String[1]; String identificacion;
+           InputStream is=null;
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(ConsultaSQL);
+            while(rs.next())
+            {
+                registros[0]=rs.getString("USU_jerarquia");
+                identificacion=rs.getString("USU_empleado");
+//                String nombre=identificacion.substring(WIDTH, WIDTH);
+//System.out.println(""+identificacion);
+                String sql="Select EMPL_foto from empleados where CONCAT(EMPL_nombres,'"+" "+"',EMPL_apellidos)='"+identificacion+"'";
+                Statement st1 = cn.createStatement();
+            ResultSet rs1 = st1.executeQuery(sql);
+                if (rs1.next()) {
+//               registros[1]=rs1.getString("EMPL_nombres");  
+//               registros[2]=rs1.getString("EMPL_apellidos");
+                is=rs1.getBinaryStream("EMPL_foto"); 
+                }
+                
+                                
+            }
+//               System.out.println(""+registros[0]);
+               if (cat.equals("Administrador")) {
+                   Principal.Label1.setText(registros[0]);
+                   
+           try{
+           if (is!=null) {
+                      BufferedImage bi=ImageIO.read(is);
+                     ImageIcon li=new ImageIcon(bi.getScaledInstance(29,38,BufferedImage.SCALE_DEFAULT));
+                      Principal.jLabel2.setIcon(li);  
+                     
+                  }
+           }catch(IOException ex){ex.printStackTrace();}
+           
+           }else if (cat.equals("Asistente de Ventas")) {
+               Invitado.Label1.setText(registros[0]);
+                   
+           try{
+           if (is!=null) {
+                      BufferedImage bi=ImageIO.read(is);
+                     ImageIcon li=new ImageIcon(bi.getScaledInstance(29,38,BufferedImage.SCALE_DEFAULT));
+                      Invitado.jLabel2.setIcon(li);  
+                     
+                  }
+           }catch(IOException ex){ex.printStackTrace();}
+               }
+              
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       }   
      
 }
