@@ -49,7 +49,7 @@ public class R_Empleados extends javax.swing.JInternalFrame {
         jLabel7.setVisible(false);
         bloquear();
 //        placeholder();
-        cargar("");
+//        cargar("");
     }
 
     /**
@@ -120,39 +120,39 @@ public class R_Empleados extends javax.swing.JInternalFrame {
         btncancelar.setEnabled(true);
     }
 
-    void cargar(String valor) {
-        String mostrar = "SELECT * FROM EMPLEADOS WHERE CONCAT(EMPL_dni,EMPL_nombres,EMPL_apellidos,EMPL_telefono,EMPL_direccion"
-                + ",EMPL_ciudad,EMPL_puesto,EMPL_fecha_contrat,EMPL_fecha_termino) LIKE '%" + valor + "%'";
-        String[] titulos = {"DNI", "Nombres", "Apellidos", "Telefono", "Direccion", "Ciudad", "Puesto", "Fecha Contrato", "Fecha Salida"};
-        String[] Registros = new String[9];
-        model = new DefaultTableModel(null, titulos);
-
-        try {
-            Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery(mostrar);
-            while (rs.next()) {
-                Registros[0] = rs.getString("EMPL_dni");
-                Registros[1] = rs.getString("EMPL_nombres");
-                Registros[2] = rs.getString("EMPL_apellidos");
-                Registros[3] = rs.getString("EMPL_telefono");
-                Registros[4] = rs.getString("EMPL_direccion");
-                Registros[5] = rs.getString("EMPL_ciudad");
-                Registros[6] = rs.getString("EMPL_puesto");
-//                  if (rs.getString("EMPL_fecha_contrat")!=null) {
-                Registros[7] = rs.getString("EMPL_fecha_contrat");
-
-//                  if (rs.getString("EMPL_fecha_termino")!=null) {
-                Registros[8] = rs.getString("EMPL_fecha_termino");
-
-                model.addRow(Registros);
-                // Registros[9]= rs.getString("Cliente_refe_domi");
-//                  model.addRow(Registros);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(R_Empleados.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
+//    void cargar(String valor) {
+//        String mostrar = "SELECT * FROM EMPLEADOS WHERE CONCAT(EMPL_dni,EMPL_nombres,EMPL_apellidos,EMPL_telefono,EMPL_direccion"
+//                + ",EMPL_ciudad,EMPL_puesto,EMPL_fecha_contrat,EMPL_fecha_termino) LIKE '%" + valor + "%'";
+//        String[] titulos = {"DNI", "Nombres", "Apellidos", "Telefono", "Direccion", "Ciudad", "Puesto", "Fecha Contrato", "Fecha Salida"};
+//        String[] Registros = new String[9];
+//        model = new DefaultTableModel(null, titulos);
+//
+//        try {
+//            Statement st = cn.createStatement();
+//            ResultSet rs = st.executeQuery(mostrar);
+//            while (rs.next()) {
+//                Registros[0] = rs.getString("EMPL_dni");
+//                Registros[1] = rs.getString("EMPL_nombres");
+//                Registros[2] = rs.getString("EMPL_apellidos");
+//                Registros[3] = rs.getString("EMPL_telefono");
+//                Registros[4] = rs.getString("EMPL_direccion");
+//                Registros[5] = rs.getString("EMPL_ciudad");
+//                Registros[6] = rs.getString("EMPL_puesto");
+////                  if (rs.getString("EMPL_fecha_contrat")!=null) {
+//                Registros[7] = rs.getString("EMPL_fecha_contrat");
+//
+////                  if (rs.getString("EMPL_fecha_termino")!=null) {
+//                Registros[8] = rs.getString("EMPL_fecha_termino");
+//
+//                model.addRow(Registros);
+//                // Registros[9]= rs.getString("Cliente_refe_domi");
+////                  model.addRow(Registros);
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(R_Empleados.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -597,7 +597,7 @@ public class R_Empleados extends javax.swing.JInternalFrame {
                 if (n > 0) {
                     JOptionPane.showMessageDialog(this, "Registro Guardado con Exito", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
                     bloquear();
-                    cargar("");
+//                    cargar("");
                 } else {
                     JOptionPane.showMessageDialog(this, "Registro Invalido", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }

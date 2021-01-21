@@ -205,7 +205,8 @@ Ingreso_Usuarios usu=new Ingreso_Usuarios();
             cont=-1;
             jProgressBar1.setValue(0);
             jProgressBar1.setStringPainted(true);
-
+            tiempo=new Timer(TWO_SECOND,new TimerListener());
+            activar(); 
 
 
 
