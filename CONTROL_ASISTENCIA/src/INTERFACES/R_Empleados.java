@@ -163,6 +163,7 @@ public class R_Empleados extends javax.swing.JInternalFrame {
         btnnuevo = new javax.swing.JButton();
         btnguardar = new javax.swing.JButton();
         btncancelar = new javax.swing.JButton();
+        btncancelar1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtcod = new javax.swing.JTextField();
@@ -187,6 +188,9 @@ public class R_Empleados extends javax.swing.JInternalFrame {
         txtsalario = new javax.swing.JTextField();
         fcontrato = new com.toedter.calendar.JDateChooser();
         ftermino = new com.toedter.calendar.JDateChooser();
+        Ifoto1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 51, 51));
         setClosable(true);
@@ -229,6 +233,16 @@ public class R_Empleados extends javax.swing.JInternalFrame {
             }
         });
 
+        btncancelar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/exit.png"))); // NOI18N
+        btncancelar1.setText("Salir");
+        btncancelar1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btncancelar1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btncancelar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncancelar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -241,7 +255,8 @@ public class R_Empleados extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnguardar)
-                    .addComponent(btncancelar))
+                    .addComponent(btncancelar)
+                    .addComponent(btncancelar1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -253,6 +268,8 @@ public class R_Empleados extends javax.swing.JInternalFrame {
                 .addComponent(btnguardar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btncancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btncancelar1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -356,7 +373,7 @@ public class R_Empleados extends javax.swing.JInternalFrame {
             .addComponent(Ifoto, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
         );
 
-        cbo_puesto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Seleccionar--", "Administrador", "Asistente de Ventas" }));
+        cbo_puesto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Seleccionar--", "Gerente", "Administrador", "Secretaria", "Recepcionista", "Tecnico" }));
         cbo_puesto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cbo_puestoMouseClicked(evt);
@@ -392,6 +409,19 @@ public class R_Empleados extends javax.swing.JInternalFrame {
 
         ftermino.setDateFormatString("dd/MM/yyyy");
 
+        Ifoto1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Ifoto1MouseClicked(evt);
+            }
+        });
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/hdigital.jpg"))); // NOI18N
+        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Huella Digital:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -414,32 +444,45 @@ public class R_Empleados extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel1)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel11))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel10))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtape)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(txtciudad, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtsalario, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtdir)
-                            .addComponent(txtnom)
-                            .addComponent(txtcod)
-                            .addComponent(txttel)
-                            .addComponent(cbo_puesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(fcontrato, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(txtape)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(txtciudad, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel13)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                                        .addComponent(txtsalario, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtdir)
+                                    .addComponent(txtnom)
+                                    .addComponent(txtcod)
+                                    .addComponent(txttel)
+                                    .addComponent(cbo_puesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addGap(260, 260, 260)
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ftermino, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(fcontrato, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ftermino, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(349, 349, 349)
+                    .addComponent(Ifoto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(349, 349, 349)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -488,8 +531,18 @@ public class R_Empleados extends javax.swing.JInternalFrame {
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(fcontrato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(ftermino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(81, 81, 81)
+                    .addComponent(Ifoto1, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                    .addGap(81, 81, 81)))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -501,16 +554,16 @@ public class R_Empleados extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(48, 48, 48)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -521,7 +574,7 @@ public class R_Empleados extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -548,14 +601,26 @@ public class R_Empleados extends javax.swing.JInternalFrame {
         dir = txtdir.getText();
         ciudad = txtciudad.getText();
 //        puesto=cbo_puesto.getSelectedItem().toString();
-        puesto = cbo_puesto.getSelectedItem().toString();
+        if (cbo_puesto.getSelectedItem().toString().equals("Gerente")) {
+          puesto = "1";  
+        }else if (cbo_puesto.getSelectedItem().toString().equals("Administrador")) {
+           puesto = "2";
+        }else if (cbo_puesto.getSelectedItem().toString().equals("Secretaria")) {
+            puesto = "3";
+        }else if (cbo_puesto.getSelectedItem().toString().equals("Recepcionista")) {
+            puesto = "4";
+        }else{
+             puesto = "5";       
+                    }
+        
+        
         salario = txtsalario.getText();
 
         if (cod.equals("") || nom.equals("") || apellP.equals("") || dir.equals("") || ciudad.equals("")) {
             JOptionPane.showMessageDialog(this, "LLene todos los campos", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
-            sql = "INSERT INTO EMPLEADOS (EMPL_dni,EMPL_nombres,EMPL_apellidos,EMPL_telefono,EMPL_direccion,EMPL_ciudad,EMPL_foto,EMPL_puesto,EMPL_salario,EMPL_fecha_contrat,EMPL_fecha_termino,EMPL_ruta) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+            sql = "INSERT INTO EMPLEADO (EMPL_dni,EMPL_nombres,EMPL_apellidos,EMPL_telefono,EMPL_direccion,EMPL_ciudad,EMPL_foto,EMPL_salario,EMPL_fecha_contrat,EMPL_fecha_termino,CARGO_CARGO_id) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
             try {
                 FileInputStream archivofoto = null;
@@ -569,30 +634,30 @@ public class R_Empleados extends javax.swing.JInternalFrame {
                 if (jLabel7.getText().equals("")) {
 //                   archivofoto= null;
                     pst.setString(7, null);
-                    pst.setString(12, null);
+//                    pst.setString(12, null);
                 } else {
                     archivofoto = new FileInputStream(jLabel7.getText());
                     pst.setBinaryStream(7, archivofoto);
-                    pst.setString(12, jLabel7.getText());
+//                    pst.setString(12, jLabel7.getText());
                 }
-                pst.setString(8, puesto);
-                pst.setString(9, salario);
+                pst.setString(8, salario);
+                
 
                 if (fcontrato.getDate() == null) {
-                    pst.setString(10, "N.definido");
+                    pst.setString(9, "N.definido");
                 } else {
                     fechaC = fcontrato.getDate();
                     fechC = "" + formatofecha.format(fechaC);
-                    pst.setString(10, fechC);
+                    pst.setString(9, fechC);
                 }
                 if (ftermino.getDate() == null) {
-                    pst.setString(11, "N.definido");
+                    pst.setString(10, "N.definido");
                 } else {
                     FT = ftermino.getDate();
                     FechaT = "" + formatofecha.format(FT);
-                    pst.setString(11, FechaT);
+                    pst.setString(10, FechaT);
                 }
-
+                pst.setString(11,puesto );
                 int n = pst.executeUpdate();
                 if (n > 0) {
                     JOptionPane.showMessageDialog(this, "Registro Guardado con Exito", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
@@ -747,21 +812,34 @@ public class R_Empleados extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtciudadKeyTyped
 
+    private void Ifoto1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Ifoto1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Ifoto1MouseClicked
+
+    private void btncancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btncancelar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Ifoto;
+    private javax.swing.JLabel Ifoto1;
+    private javax.swing.JLabel Ifoto2;
     private javax.swing.JButton btncancelar;
+    private javax.swing.JButton btncancelar1;
     private javax.swing.JButton btnguardar;
     private javax.swing.JButton btnnuevo;
     public static javax.swing.JComboBox cbo_puesto;
     private com.toedter.calendar.JDateChooser fcontrato;
     private com.toedter.calendar.JDateChooser ftermino;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -771,6 +849,7 @@ public class R_Empleados extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JTextField txtape;
     private javax.swing.JTextField txtciudad;
     private javax.swing.JTextField txtcod;
