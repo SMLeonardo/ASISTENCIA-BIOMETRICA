@@ -8,11 +8,6 @@ import java.sql.*;
 import java.util.Scanner;
 import javax.swing.*;
 
-/**
- *
- * @author Sony
- */
-
 public class Conexion {
 
     Connection conect = null;
