@@ -214,7 +214,6 @@ private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
 // TODO add your handling code here:
     LOGIN principal = new LOGIN(); 
-    LOGIN principal1 = new LOGIN();
     principal.setVisible(true);
     principal.pack();
     this.setVisible(false);

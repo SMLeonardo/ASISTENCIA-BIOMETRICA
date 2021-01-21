@@ -72,6 +72,8 @@ public class Ingreso_Usuarios extends javax.swing.JFrame {
         txtape = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtnom = new javax.swing.JTextField();
+        txtId = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,7 +97,7 @@ public class Ingreso_Usuarios extends javax.swing.JFrame {
 
         password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        cbo_jerarquia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Asistente de Ventas" }));
+        cbo_jerarquia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Invitado" }));
         cbo_jerarquia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbo_jerarquiaActionPerformed(evt);
@@ -232,6 +234,10 @@ public class Ingreso_Usuarios extends javax.swing.JFrame {
             }
         });
 
+        txtId.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel9.setText("ID");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -244,18 +250,27 @@ public class Ingreso_Usuarios extends javax.swing.JFrame {
                         .addGap(5, 5, 5)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel11))))
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel9))))
                 .addGap(39, 39, 39)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtdni, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtnom)
-                    .addComponent(txtape))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtdni, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                    .addComponent(txtnom, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtape, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel9)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtdni, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -267,7 +282,7 @@ public class Ingreso_Usuarios extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtape, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -293,8 +308,8 @@ public class Ingreso_Usuarios extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -312,9 +327,7 @@ public class Ingreso_Usuarios extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -399,23 +412,26 @@ txtcod.setText(""+codigo); System.out.println(""+codigo);
                 txtuser.getText().equals("")|| password.getPassword().equals("")||txtcod_empl.getText().equals("")){
             JOptionPane.showMessageDialog(this, "LLene todos los campos", "ERROR", JOptionPane.ERROR_MESSAGE);
         }else{
-            String sql="INSERT INTO EMPLEADOS (EMPL_dni,EMPL_nombres,EMPL_apellidos,EMPL_telefono,EMPL_direccion,EMPL_ciudad,EMPL_foto,EMPL_puesto,EMPL_salario,EMPL_fecha_contrat,EMPL_fecha_termino,EMPL_ruta)" +
-             "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql="INSERT INTO EMPLEADOS (EMPL_id,EMPL_dni,EMPL_nombres,EMPL_apellidos,EMPL_telefono,EMPL_direccion,EMPL_ciudad,EMPL_foto,EMPL_salario,EMPL_fecha_contrat,EMPL_fecha_termino,CARGO_CARGO_id)" +
+             "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             try {
                 
                 PreparedStatement pst = cn.prepareStatement(sql);
-                pst.setString(1, txtdni.getText());
-                pst.setString(2, txtnom.getText());
-                pst.setString(3, txtape.getText());
-                pst.setInt(4, 0);
-                pst.setString(5, "");
+                
+                pst.setInt(1, Integer.parseInt(txtId.getText()));
+                pst.setInt(2, Integer.parseInt(txtdni.getText()));
+                pst.setString(3, txtnom.getText());
+                pst.setString(4, txtape.getText());
+                pst.setInt(5, 0);
                 pst.setString(6, "");
-                pst.setString(7, null);
-                pst.setString(12, null);
-                pst.setString(8, "Administrador");
+                pst.setString(7, "");
+                pst.setString(8, null);
                 pst.setString(9, "0.0");
                 pst.setString(10, "N.definido");
                 pst.setString(11, "N.definido");
+                pst.setString(12, "1");
+                ;
+                
                 
 
                  pst.executeUpdate();
@@ -425,16 +441,16 @@ txtcod.setText(""+codigo); System.out.println(""+codigo);
                 Logger.getLogger(R_Empleados.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            String ins="INSERT INTO USUARIO (USU_id,USU_usuario ,USU_contraseña,USU_jerarquia,USU_empleado,USU_estado) VALUES(?,?,?,?,?,?)";
+            String ins="INSERT INTO USUARIO (USU_id,USU_usuario ,USU_contraseña,USU_estado,EMPLEADOS_EMPL_dni,TIPO_DE_USUARIO_TIPO_USER_id) VALUES(?,?,?,?,?,?)";
             try {
                 PreparedStatement pst1 = (PreparedStatement) cn.prepareStatement(ins);
             pst1.setInt(1, Integer.parseInt(txtcod.getText()));
             pst1.setString(2, txtuser.getText());
             pst1.setString(3,new String(password.getPassword()));
-            pst1.setString(4, cbo_jerarquia.getSelectedItem().toString());
-           
+            
+            pst1.setString(4,"Activo");
             pst1.setString(5, txtcod_empl.getText());
-            pst1.setString(6,"Activo");
+            pst1.setString(6, cbo_jerarquia.getSelectedItem().toString());
             int n= pst1.executeUpdate();
                 if(n>0)
                 {
@@ -448,7 +464,7 @@ txtcod.setText(""+codigo); System.out.println(""+codigo);
             } catch (SQLException ex) {
                 Logger.getLogger(Ingreso_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Login lg=new Login();
+            LOGIN lg=new LOGIN();
                 lg.setVisible(true);
                 dispose();
         }
@@ -560,11 +576,13 @@ txtcod.setText(""+codigo); System.out.println(""+codigo);
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPasswordField password;
+    private javax.swing.JLabel txtId;
     private javax.swing.JTextField txtape;
     private javax.swing.JTextField txtcod;
     private javax.swing.JTextField txtcod_empl;
@@ -573,24 +591,5 @@ txtcod.setText(""+codigo); System.out.println(""+codigo);
     private javax.swing.JTextField txtuser;
     // End of variables declaration//GEN-END:variables
 
-//void Empleados(String valor){
-//    String mostrar="SELECT * FROM EMPLEADOS WHERE CONCAT(EMPL_nombres,EMPL_apellidos) LIKE '%"+valor+"%'";
-//    String Registros; String Registros1;
-//  String listaE;
-//        try {
-//              Statement st = cn.createStatement();
-//              ResultSet rs = st.executeQuery(mostrar);
-//              while(rs.next())
-//              {
-//                  Registros= rs.getString("EMPL_nombres");
-//                  Registros1= rs.getString("EMPL_apellidos");
-//                  listaE=Registros+" "+Registros1;
-//                  cbo_jerarquia.addItem(listaE); 
-//              }
-//             
-//        } catch (SQLException ex) {
-//            Logger.getLogger(R_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    
-//  }
+
 }
