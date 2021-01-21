@@ -102,7 +102,7 @@ public class R_Usuarios extends javax.swing.JInternalFrame {
             }
         });
 
-        cbo_jerarquia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ADMINISTRADOR", "INVITADO" }));
+        cbo_jerarquia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Invitado" }));
         cbo_jerarquia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbo_jerarquiaActionPerformed(evt);
@@ -123,7 +123,7 @@ public class R_Usuarios extends javax.swing.JInternalFrame {
             }
         });
 
-        cbo_estado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--SELECCIONAR--", "ACTIVO", "INACTIVO" }));
+        cbo_estado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Seleccionar--", "Activo", "Inactivo" }));
         cbo_estado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbo_estadoActionPerformed(evt);
@@ -301,11 +301,11 @@ public class R_Usuarios extends javax.swing.JInternalFrame {
         txtcod.setText("");
         txtuser.setText("");
         password.setText("");
-        txtcod_empl.setSelectedItem("--SELECCIONAR--");
+        txtcod_empl.setSelectedItem("--Seleccionar--");
         txtcod.setText("");
-        txtcod_empl.setSelectedItem("--SELECCIONAR--");
-        cbo_jerarquia.setSelectedItem("ADMINISTRADOR");
-        cbo_estado.setSelectedItem("--SELECCIONAR--");
+        txtcod_empl.setSelectedItem("--Seleccionar--");
+        cbo_jerarquia.setSelectedItem("Administrador");
+        cbo_estado.setSelectedItem("--Seleccionar--");
     }
 
     void desbloquear() {
@@ -356,15 +356,33 @@ public class R_Usuarios extends javax.swing.JInternalFrame {
         if (password.getPassword().equals("") || txtcod_empl.getSelectedItem().toString().equals("--Seleccionar--") || cbo_estado.getSelectedItem().toString().equals("--Seleccionar--")) {
             JOptionPane.showMessageDialog(this, "LLene todos los campos", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
-            String ins = "INSERT INTO USUARIO (USU_id,USU_usuario,USU_contraseña,USU_jerarquia,USU_empleado,USU_estado) VALUES(?,?,?,?,?,?)";
+            String ins = "INSERT INTO USUARIO (USU_id,USU_usuario,USU_contraseña,USU_estado,TIPO_DE_USUARIO_TIPO_USER_id,EMPLEADO_EMPL_id) VALUES(?,?,?,?,?,?)";
+            String mostrar = "SELECT EMPL_id FROM EMPLEADO WHERE CONCAT(EMPL_nombres,EMPL_apellidos) LIKE '%" +txtcod_empl.getSelectedItem().toString()+ "%'";
             try {
                 PreparedStatement pst = (PreparedStatement) cn.prepareStatement(ins);
                 pst.setInt(1, Integer.parseInt(txtcod.getText()));
                 pst.setString(2, txtuser.getText());
                 pst.setString(3, new String(password.getPassword()));
-                pst.setString(4, cbo_jerarquia.getSelectedItem().toString());
-                pst.setString(5, txtcod_empl.getSelectedItem().toString());
-                pst.setString(6, "Activo");
+                pst.setString(4, "Activo");
+                if (cbo_jerarquia.getSelectedItem().toString().equals("Administrador")) {
+                pst.setInt(5, Integer.parseInt("1"));    
+                }else{
+                pst.setInt(5, Integer.parseInt("2"));    
+                }
+ //////////////////////////////////////////////////////////////////////////////////////////////               
+                try {
+                Statement st = cn.createStatement();
+                    ResultSet rs = st.executeQuery(mostrar);
+                    if (rs.next()) {
+                      pst.setInt(6, rs.getInt("EMPL_id"));   
+                        System.out.println(""+rs.getInt("EMPL_id"));
+            }
+            } catch (SQLException ex) {
+                Logger.getLogger(R_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
+//                pst.setString(6, txtcod_empl.getSelectedItem().toString());
+///////////////////////////////////////////////////////////////////////////////////////////////                
                 int n = pst.executeUpdate();
                 if (n > 0) {
                     JOptionPane.showMessageDialog(this, "Registro Guardado con Exito", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
@@ -463,7 +481,7 @@ public class R_Usuarios extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     void Empleados(String valor) {
-        String mostrar = "SELECT * FROM EMPLEADOS WHERE CONCAT(EMPL_nombres,EMPL_apellidos) LIKE '%" + valor + "%'";
+        String mostrar = "SELECT * FROM EMPLEADO WHERE CONCAT(EMPL_nombres,EMPL_apellidos) LIKE '%" + valor + "%'";
         String Registros;
         String Registros1;
         String listaE;
