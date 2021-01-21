@@ -431,7 +431,7 @@ txtcod.setText(""+codigo); System.out.println(""+codigo);
                 pst.setString(11, "N.definido");
                 pst.setString(12, "1");
                 ;
-                
+                ;
                 
 
                  pst.executeUpdate();
