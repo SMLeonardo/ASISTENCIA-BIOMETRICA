@@ -55,9 +55,6 @@ public class Principal extends javax.swing.JFrame {
 
         jdpescritorio = new javax.swing.JDesktopPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        Label1 = new javax.swing.JLabel();
-        Label2 = new javax.swing.JLabel();
         lbl_Fondo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -94,44 +91,15 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.setAutoscrolls(true);
         jPanel1.setOpaque(false);
 
-        jLabel2.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
-                jLabel2ComponentResized(evt);
-            }
-        });
-
-        Label1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        Label1.setForeground(new java.awt.Color(255, 255, 255));
-        Label1.setText("jLabel3");
-
-        Label2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        Label2.setForeground(new java.awt.Color(0, 204, 51));
-        Label2.setText("Sesion Iniciada...");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Label1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                    .addComponent(Label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(607, Short.MAX_VALUE))
+            .addGap(0, 800, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Label1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Label2))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
         jdpescritorio.add(jPanel1);
@@ -245,7 +213,8 @@ private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 
 private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
 // TODO add your handling code here:
-    LOGIN principal = new LOGIN();
+    LOGIN principal = new LOGIN(); 
+    LOGIN principal1 = new LOGIN();
     principal.setVisible(true);
     principal.pack();
     this.setVisible(false);
@@ -285,11 +254,6 @@ private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here: 
     }//GEN-LAST:event_formWindowActivated
-
-    private void jLabel2ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel2ComponentResized
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jLabel2ComponentResized
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
@@ -338,9 +302,6 @@ private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JLabel Label1;
-    public static javax.swing.JLabel Label2;
-    public static javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

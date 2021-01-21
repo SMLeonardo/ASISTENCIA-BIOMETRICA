@@ -5,7 +5,7 @@
  */
 package INTERFACES;
 
-import Controlador.Conexion;
+import CONTROLADOR.Conexion;
 import java.sql.Connection;
 //import java.sql.ResultSet;
 //import java.sql.SQLException;
@@ -37,11 +37,8 @@ public class Ingreso_Usuarios extends javax.swing.JFrame {
                 Dimension ventana = getSize();
                 setLocation((pantalla.width - ventana.width) / 2,
                 (pantalla.height - ventana.height) / 2);
-//                Login usu=new Login();
-//                usu.setVisible(false);
                 bloquear();
                 CodigoUsuarios();
-//                cargar("");
     }
 
     /**
@@ -335,12 +332,6 @@ public class Ingreso_Usuarios extends javax.swing.JFrame {
     
     
     }
-//    void limpiar(){
-//    txtcod.setText("");
-//    password.setText("");
-//    txtcod_empl.setText("");
-//    
-//    }
     void desbloquear(){
     txtcod.setEnabled(false);
     txtuser.setEnabled(true);
@@ -353,10 +344,7 @@ public class Ingreso_Usuarios extends javax.swing.JFrame {
     }
               public void CodigoUsuarios(){
           String SQL = "";
-//               if (password.getText().equals(null)) {
-                   
-               
-               
+
                  SQL="SELECT MAX(USU_id) FROM usuario ";   
           String c="";
            try {
@@ -388,12 +376,10 @@ txtcod.setText(""+codigo); System.out.println(""+codigo);
         // TODO add your handling code here:
         if(txtcod.getText().length()==8)
         evt.consume();
-        //    JOptionPane.showMessageDialog(null,"La cantidad de caracteres no es valida"+"/ ingresar 8 carateres", "ADVERTENCIA",JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_txtcodKeyTyped
 
     private void cbo_jerarquiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_jerarquiaActionPerformed
-        // TODO add your handling code here:
-//        cbo_jerarquia1.setText(cbo_jerarquia1.getSelectedItem().toString());
+
     }//GEN-LAST:event_cbo_jerarquiaActionPerformed
 
     private void txtcod_emplKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcod_emplKeyTyped
