@@ -269,22 +269,14 @@ Ingreso_Usuarios usu=new Ingreso_Usuarios();
         if (cont==100) {
        tiempo.stop();
 
-            if (acceder().equals("Administrador")) {
+            if (acceder().equals("1")) {
               JOptionPane.showMessageDialog(null, "Has ingresado satisfactoriamente al sistema", "Bienvenido", JOptionPane.DEFAULT_OPTION, icon);
          Principal principal = new Principal();  
             principal.setVisible(true);       
             
 //            Principal.Label2.setText(jTextField1.getText());
-            Captura("Administrador");
-            dispose();  
-            }else if(acceder().equals("Asistente de Ventas")){
-             JOptionPane.showMessageDialog(null, "Has ingresado satisfactoriamente al sistema", "Bienvenido", JOptionPane.DEFAULT_OPTION, icon);
-         Invitado invitado = new Invitado();  
-            invitado.setVisible(true);       
             
-//            Principal.Label2.setText(jTextField1.getText());
-            Captura("Asistente de Ventas");
-            dispose();     
+            dispose();   
             }else if(acceder().equals("")){
                 System.out.println(""+acceder());
                 JOptionPane.showMessageDialog(null, "Por favor ingrese un usuario y/o contraseña correctos", "Acceso denegado",
@@ -339,7 +331,7 @@ String pass; IconError error=new IconError();MyIcon icon = new MyIcon();
     Connection cn = (Connection) cc.Conexion();
       
 
-       String sql="SELECT USU_usuario,USU_contraseña,USU_jerarquia FROM usuario where USU_estado='Activo'";
+       String sql="SELECT USU_usuario,USU_contraseña,TIPO_DE_USUARIO_TIPO_USER_id FROM usuario where USU_estado='Activo'";
         try {
             Statement st = (Statement) cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -349,7 +341,7 @@ String pass; IconError error=new IconError();MyIcon icon = new MyIcon();
            
           if (rs.getString("USU_usuario").equals(usuario)&& rs.getString("USU_contraseña").equals(pass)) {  
 //         resultado=1;
-         tipo=rs.getString("USU_jerarquia");
+         tipo=String.valueOf(rs.getInt("TIPO_DE_USUARIO_TIPO_USER_id"));
      }
             
            
@@ -367,7 +359,7 @@ String pass; IconError error=new IconError();MyIcon icon = new MyIcon();
 
         } catch (SQLException ex) {
 
-            JOptionPane.showMessageDialog(null, ex, "Error de desconexión", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex, "Error de de conexión", JOptionPane.ERROR_MESSAGE);
 
         }
 
@@ -376,62 +368,6 @@ String pass; IconError error=new IconError();MyIcon icon = new MyIcon();
 
        return tipo;
         }
-       public void Captura(String cat){
- char t;
-           try {
-            
-            String ConsultaSQL="SELECT  USU_jerarquia,USU_empleado FROM usuario WHERE USU_usuario ='"+jTextField1.getText()+"'";
-       Connection cn = (Connection) cc.Conexion();  
-            String []registros= new String[1]; String identificacion;
-           InputStream is=null;
-            Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery(ConsultaSQL);
-            while(rs.next())
-            {
-                registros[0]=rs.getString("USU_jerarquia");
-                identificacion=rs.getString("USU_empleado");
-//                String nombre=identificacion.substring(WIDTH, WIDTH);
-//System.out.println(""+identificacion);
-                String sql="Select EMPL_foto from empleados where CONCAT(EMPL_nombres,'"+" "+"',EMPL_apellidos)='"+identificacion+"'";
-                Statement st1 = cn.createStatement();
-            ResultSet rs1 = st1.executeQuery(sql);
-                if (rs1.next()) {
-//               registros[1]=rs1.getString("EMPL_nombres");  
-//               registros[2]=rs1.getString("EMPL_apellidos");
-                is=rs1.getBinaryStream("EMPL_foto"); 
-                }
-                
-                                
-            }
-//               System.out.println(""+registros[0]);
-               if (cat.equals("Administrador")) {
-                   Principal.Label1.setText(registros[0]);
-                   
-           try{
-           if (is!=null) {
-                      BufferedImage bi=ImageIO.read(is);
-                     ImageIcon li=new ImageIcon(bi.getScaledInstance(29,38,BufferedImage.SCALE_DEFAULT));
-                      Principal.jLabel2.setIcon(li);  
-                     
-                  }
-           }catch(IOException ex){ex.printStackTrace();}
-           
-           }else if (cat.equals("Asistente de Ventas")) {
-               Invitado.Label1.setText(registros[0]);
-                   
-           try{
-           if (is!=null) {
-                      BufferedImage bi=ImageIO.read(is);
-                     ImageIcon li=new ImageIcon(bi.getScaledInstance(29,38,BufferedImage.SCALE_DEFAULT));
-                      Invitado.jLabel2.setIcon(li);  
-                     
-                  }
-           }catch(IOException ex){ex.printStackTrace();}
-               }
-              
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       }   
+       
      
 }

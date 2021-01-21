@@ -176,7 +176,6 @@ public class Ingreso_Usuarios extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnguardar.setBackground(new java.awt.Color(148, 175, 255));
-        btnguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (Save).jpg"))); // NOI18N
         btnguardar.setText("REGISTRAR");
         btnguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -398,8 +397,8 @@ txtcod.setText(""+codigo); System.out.println(""+codigo);
                 txtuser.getText().equals("")|| password.getPassword().equals("")||txtcod_empl.getText().equals("")){
             JOptionPane.showMessageDialog(this, "LLene todos los campos", "ERROR", JOptionPane.ERROR_MESSAGE);
         }else{
-            String sql="INSERT INTO EMPLEADOS (EMPL_id,EMPL_dni,EMPL_nombres,EMPL_apellidos,EMPL_telefono,EMPL_direccion,EMPL_ciudad,EMPL_foto,EMPL_salario,EMPL_fecha_contrat,EMPL_fecha_termino,CARGO_CARGO_id)" +
-             "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql="INSERT INTO EMPLEADO (EMPL_id,EMPL_dni,EMPL_nombres,EMPL_apellidos,EMPL_telefono,EMPL_direccion,EMPL_ciudad,EMPL_foto,EMPL_salario,EMPL_fecha_contrat,EMPL_fecha_termino,CARGO_CARGO_id)" +
+             "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
             try {
                 
                 PreparedStatement pst = cn.prepareStatement(sql);
@@ -415,9 +414,9 @@ txtcod.setText(""+codigo); System.out.println(""+codigo);
                 pst.setString(9, "0.0");
                 pst.setString(10, "N.definido");
                 pst.setString(11, "N.definido");
-                pst.setString(12, "1");
+                pst.setInt(12, Integer.parseInt("1"));
                 ;
-                ;
+                
                 
 
                  pst.executeUpdate();
@@ -427,15 +426,18 @@ txtcod.setText(""+codigo); System.out.println(""+codigo);
                 Logger.getLogger(R_Empleados.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            String ins="INSERT INTO USUARIO (USU_id,USU_usuario ,USU_contraseña,USU_estado,EMPLEADOS_EMPL_dni,TIPO_DE_USUARIO_TIPO_USER_id) VALUES(?,?,?,?,?,?)";
+            String ins="INSERT INTO USUARIO (USU_id,USU_usuario ,USU_contraseña,USU_estado,EMPLEADO_EMPL_id,TIPO_DE_USUARIO_TIPO_USER_id) VALUES(?,?,?,?,?,?)";
             try {
                 PreparedStatement pst1 = (PreparedStatement) cn.prepareStatement(ins);
             pst1.setInt(1, Integer.parseInt(txtcod.getText()));
             pst1.setString(2, txtuser.getText());
             pst1.setString(3,new String(password.getPassword()));
             pst1.setString(4,"Activo");
-            pst1.setString(5, txtcod_empl.getText());
-            pst1.setString(6, cbo_jerarquia.getSelectedItem().toString());
+            pst1.setInt(5, Integer.parseInt(txtId.getText()));
+                if (cbo_jerarquia.getSelectedItem().toString().equals("Administrador")) {
+                    pst1.setInt(6, Integer.parseInt(("1")));
+                }
+            
             int n= pst1.executeUpdate();
                 if(n>0)
                 {

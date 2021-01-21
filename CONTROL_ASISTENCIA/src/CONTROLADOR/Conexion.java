@@ -23,7 +23,7 @@ public class Conexion {
 
             //Cargamos el Driver MySQL
             Class.forName("com.mysql.jdbc.Driver");
-            conect = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/ELECTRO", "root", "12345678");
+            conect = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/asistencia", "root", "12345678");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error " + e);
         }
