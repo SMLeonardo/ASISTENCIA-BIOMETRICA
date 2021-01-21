@@ -447,7 +447,6 @@ txtcod.setText(""+codigo); System.out.println(""+codigo);
             pst1.setInt(1, Integer.parseInt(txtcod.getText()));
             pst1.setString(2, txtuser.getText());
             pst1.setString(3,new String(password.getPassword()));
-            
             pst1.setString(4,"Activo");
             pst1.setString(5, txtcod_empl.getText());
             pst1.setString(6, cbo_jerarquia.getSelectedItem().toString());
