@@ -48,7 +48,7 @@ public class R_Empleados extends javax.swing.JInternalFrame {
         initComponents();
         jLabel7.setVisible(false);
         bloquear();
-//        placeholder();
+        placeholder();
 //        cargar("");
     }
 

@@ -357,7 +357,7 @@ public class R_Usuarios extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "LLene todos los campos", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
             String ins = "INSERT INTO USUARIO (USU_id,USU_usuario,USU_contraseña,USU_estado,TIPO_DE_USUARIO_TIPO_USER_id,EMPLEADO_EMPL_id) VALUES(?,?,?,?,?,?)";
-            String mostrar = "SELECT EMPL_id FROM EMPLEADO WHERE CONCAT(EMPL_nombres,EMPL_apellidos) LIKE '%" +txtcod_empl.getSelectedItem().toString()+ "%'";
+            String mostrar = "SELECT EMPL_id FROM EMPLEADO WHERE CONCAT(EMPL_nombres,'"+" "+"',EMPL_apellidos)='"+txtcod_empl.getSelectedItem().toString()+ "'";
             try {
                 PreparedStatement pst = (PreparedStatement) cn.prepareStatement(ins);
                 pst.setInt(1, Integer.parseInt(txtcod.getText()));
@@ -374,8 +374,8 @@ public class R_Usuarios extends javax.swing.JInternalFrame {
                 Statement st = cn.createStatement();
                     ResultSet rs = st.executeQuery(mostrar);
                     if (rs.next()) {
-                      pst.setInt(6, rs.getInt("EMPL_id"));   
-                        System.out.println(""+rs.getInt("EMPL_id"));
+                      pst.setInt(6,  Integer.parseInt(rs.getString("EMPL_id")));   
+                        
             }
             } catch (SQLException ex) {
                 Logger.getLogger(R_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
