@@ -266,6 +266,7 @@ private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         C_Usuario consultaU=new C_Usuario();
         jdpescritorio.add(consultaU);
         consultaU.show();
+        
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**

@@ -39,7 +39,6 @@ public class GestionEncabezadoTabla implements TableCellRenderer {
         jcomponent.setBackground( new Color(65,65,65) );
         //jcomponent.setToolTipText("Tabla Seguimiento");
         jcomponent.setForeground(Color.white);
-        
         return jcomponent;
     }
 

@@ -7,6 +7,7 @@ package CONTROLADOR;
 
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
@@ -19,19 +20,53 @@ public class Render extends DefaultTableCellRenderer{
     public Component getTableCellRendererComponent(JTable table, Object value, 
             boolean isSelected, boolean hasFocus, int row, int column) {
         
-        if(value instanceof JButton){
-            JButton btn = (JButton)value;
-            if(isSelected){
-                btn.setForeground(Color.white);
-                btn.setBackground(new java.awt.Color(255,153,0));
+//        if(value instanceof JButton){
+//            JButton btn1 = (JButton)value;
+//            if(isSelected){
+//                btn1.setForeground(Color.white);
+//                btn1.setBackground(new java.awt.Color(255,153,0));
+//                
+//            }else{
+//                btn1.setForeground(Color.white);
+//                btn1.setBackground(new java.awt.Color(255,153,0));
+//            }
+//            return btn1;
+//        }
+     
+          
+                    if(value instanceof JButton){
+            JButton btn1 = (JButton)value; 
+                       if (btn1.getName().equals("m")) {
+                           if(isSelected){
+//                btn1.setForeground(Color.white);
+                btn1.setBackground(new java.awt.Color(255,255,255));
+                btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/edit.png")));     
+                btn1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+            }else{
+//                btn1.setForeground(Color.white);
+               btn1.setBackground(new java.awt.Color(255,255,255));
+            btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/edit.png")));
+            btn1.setBorder(null);
+                           }
+            return btn1; 
+                        }else if (btn1.getName().equals("e")) {
+                             if(isSelected){
+                btn1.setBackground(new java.awt.Color(255,255,255));
+                btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/delete.png")));     
+                btn1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
                 
             }else{
-                btn.setForeground(Color.white);
-                btn.setBackground(new java.awt.Color(255,153,0));
+                btn1.setBackground(new java.awt.Color(255,255,255));
+                btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/delete.png")));     
+                btn1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
             }
-            return btn;
+            return btn1; 
+                        }
+            
         }
-        
+//                this.setBackground(Color.GREEN);
+//                this.setForeground(Color.black);
+            
         
         if(value instanceof JCheckBox){
             JCheckBox ch = (JCheckBox)value;
@@ -40,6 +75,7 @@ public class Render extends DefaultTableCellRenderer{
         
         return super.getTableCellRendererComponent(table, value, isSelected, 
                 hasFocus, row, column); //To change body of generated methods, choose Tools | Templates.
+//    return this;
     }
 
     
