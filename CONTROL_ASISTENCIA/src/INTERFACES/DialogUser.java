@@ -23,8 +23,10 @@ import javax.swing.JOptionPane;
  * @author LEONARDO SUYON
  */
 public class DialogUser extends javax.swing.JDialog {
+
     Conexion cc = new Conexion();
     Connection cn = (Connection) cc.Conexion();
+
     /**
      * Creates new form NewJDialog
      */
@@ -35,10 +37,9 @@ public class DialogUser extends javax.swing.JDialog {
         Dimension ventana = getSize();
         setLocation((pantalla.width - ventana.width) / 2,
                 (pantalla.height - ventana.height) / 2);
+        txtcod.setEnabled(false);
         Empleados("");
     }
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,7 +67,6 @@ public class DialogUser extends javax.swing.JDialog {
         txtcod_empl = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        btnnuevo = new javax.swing.JButton();
         btnguardar = new javax.swing.JButton();
         btncancelar = new javax.swing.JButton();
 
@@ -85,6 +85,7 @@ public class DialogUser extends javax.swing.JDialog {
         setUndecorated(true);
 
         jInternalFrame1.setClosable(true);
+        jInternalFrame1.setTitle("Actualizar Datos");
         jInternalFrame1.setVisible(true);
         jInternalFrame1.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -234,20 +235,10 @@ public class DialogUser extends javax.swing.JDialog {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        btnnuevo.setBackground(new java.awt.Color(0, 102, 255));
-        btnnuevo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnnuevo.setForeground(new java.awt.Color(255, 255, 255));
-        btnnuevo.setText("Nuevo");
-        btnnuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnnuevoActionPerformed(evt);
-            }
-        });
-
-        btnguardar.setBackground(new java.awt.Color(51, 102, 0));
+        btnguardar.setBackground(new java.awt.Color(0, 102, 255));
         btnguardar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnguardar.setForeground(new java.awt.Color(255, 255, 255));
-        btnguardar.setText("Guardar");
+        btnguardar.setText("Guardar Cambios");
         btnguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnguardarActionPerformed(evt);
@@ -270,22 +261,19 @@ public class DialogUser extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btncancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnguardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                    .addComponent(btnnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -306,7 +294,7 @@ public class DialogUser extends javax.swing.JDialog {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
@@ -335,40 +323,6 @@ public class DialogUser extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-  void bloquear() {
-        txtcod.setEnabled(false);
-        txtuser.setEnabled(false);
-        password.setEnabled(false);
-        txtcod_empl.setEnabled(false);
-        cbo_jerarquia.setEnabled(false);
-        cbo_estado.setEnabled(false);
-        btnguardar.setEnabled(false);
-        btnnuevo.setEnabled(true);
-        btncancelar.setEnabled(false);
-    }
-
-    void limpiar() {
-        txtcod.setText("");
-        txtuser.setText("");
-        password.setText("");
-        txtcod_empl.setSelectedItem("--Seleccionar--");
-        txtcod.setText("");
-        txtcod_empl.setSelectedItem("--Seleccionar--");
-        cbo_jerarquia.setSelectedItem("Administrador");
-        cbo_estado.setSelectedItem("--Seleccionar--");
-    }
-
-    void desbloquear() {
-        txtcod.setEnabled(true);
-        txtuser.setEnabled(true);
-        password.setEnabled(true);
-        txtcod_empl.setEnabled(true);
-        cbo_jerarquia.setEnabled(true);
-        cbo_estado.setEnabled(true);
-        btnguardar.setEnabled(true);
-        btnnuevo.setEnabled(false);
-        btncancelar.setEnabled(true);
-    }
 
     public void CodigoUsuarios() {
         String SQL = "";
@@ -434,7 +388,7 @@ public class DialogUser extends javax.swing.JDialog {
 
     private void txtuserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtuserKeyReleased
         // TODO add your handling code here:
-        if (evt.getKeyCode()==KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             password.requestFocus();// al presionar enter mandas el cursor al siguiente text
         }
     }//GEN-LAST:event_txtuserKeyReleased
@@ -452,64 +406,37 @@ public class DialogUser extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtcod_emplActionPerformed
 
-    private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
-        // TODO add your handling code here:
-        //        desbloquear();
-
-        btnnuevo.setEnabled(false);
-        btnguardar.setEnabled(true);
-        btncancelar.setEnabled(true);
-        txtcod.setEnabled(false);
-
-        txtuser.setEnabled(true);
-        password.setEnabled(true);
-        txtcod_empl.setEnabled(true);
-        cbo_jerarquia.setEnabled(true);
-        cbo_estado.setEnabled(true);
-        limpiar();
-        txtuser.requestFocus();
-        CodigoUsuarios();
-    }//GEN-LAST:event_btnnuevoActionPerformed
-
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         // TODO add your handling code here:
-        if (password.getPassword().equals("") || txtcod_empl.getSelectedItem().toString().equals("--Seleccionar--") || cbo_estado.getSelectedItem().toString().equals("--Seleccionar--")) {
+        if (txtuser.getText().equals("") || password.getPassword().equals("") || txtcod_empl.getSelectedItem().toString().equals("--Seleccionar--") || cbo_estado.getSelectedItem().toString().equals("--Seleccionar--")) {
             JOptionPane.showMessageDialog(this, "LLene todos los campos", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
-            String ins = "INSERT INTO USUARIO (USU_id,USU_usuario,USU_contraseña,USU_estado,TIPO_DE_USUARIO_TIPO_USER_id,EMPLEADO_EMPL_id) VALUES(?,?,?,?,?,?)";
-            String mostrar = "SELECT EMPL_id FROM EMPLEADO WHERE CONCAT(EMPL_nombres,'"+" "+"',EMPL_apellidos)='"+txtcod_empl.getSelectedItem().toString()+ "'";
+            String ins = "UPDATE USUARIO SET USU_usuario=?,USU_contraseña=?,USU_estado=?,TIPO_DE_USUARIO_TIPO_USER_id=?,EMPLEADO_EMPL_id=? WHERE USU_id='"+txtcod.getText()+"'";
+            String mostrar = "SELECT EMPL_id FROM EMPLEADO WHERE CONCAT(EMPL_nombres,'" + " " + "',EMPL_apellidos)='" + txtcod_empl.getSelectedItem().toString() + "'";
             try {
                 PreparedStatement pst = (PreparedStatement) cn.prepareStatement(ins);
-                pst.setInt(1, Integer.parseInt(txtcod.getText()));
-                pst.setString(2, txtuser.getText());
-                pst.setString(3, new String(password.getPassword()));
-                pst.setString(4, "Activo");
+                pst.setString(1, txtuser.getText());
+                pst.setString(2, new String(password.getPassword()));
+                pst.setString(3, "Activo");
                 if (cbo_jerarquia.getSelectedItem().toString().equals("Administrador")) {
-                    pst.setInt(5, Integer.parseInt("1"));
-                }else{
-                    pst.setInt(5, Integer.parseInt("2"));
+                    pst.setInt(4, Integer.parseInt("1"));
+                } else {
+                    pst.setInt(4, Integer.parseInt("2"));
                 }
                 //////////////////////////////////////////////////////////////////////////////////////////////
                 try {
                     Statement st = cn.createStatement();
                     ResultSet rs = st.executeQuery(mostrar);
                     if (rs.next()) {
-                        pst.setInt(6,  Integer.parseInt(rs.getString("EMPL_id")));
+                        pst.setInt(5, Integer.parseInt(rs.getString("EMPL_id")));
 
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(R_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
-                //                pst.setString(6, txtcod_empl.getSelectedItem().toString());
-                ///////////////////////////////////////////////////////////////////////////////////////////////
                 int n = pst.executeUpdate();
                 if (n > 0) {
-                    JOptionPane.showMessageDialog(this, "Registro Guardado con Exito", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-                    btnguardar.setEnabled(false);
-                    btnnuevo.setEnabled(true);
-                    btncancelar.setEnabled(true);
-                    bloquear();
+                    JOptionPane.showMessageDialog(this, "Registro Actualizado con Exito", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(this, "Registro Invalido", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
@@ -525,7 +452,6 @@ public class DialogUser extends javax.swing.JDialog {
         int confirmar = JOptionPane.showConfirmDialog(this, "¿Esta seguro?", "Alerta!", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
         if (confirmar == 0) {
             txtcod.setText("");
-            bloquear();
         }
     }//GEN-LAST:event_btncancelarActionPerformed
 
@@ -575,7 +501,6 @@ public class DialogUser extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btncancelar;
     private javax.swing.JButton btnguardar;
-    private javax.swing.JButton btnnuevo;
     public static javax.swing.JComboBox cbo_estado;
     public static javax.swing.JComboBox cbo_jerarquia;
     private javax.swing.JDialog jDialog1;
@@ -614,7 +539,8 @@ void Empleados(String valor) {
         }
 
     }
-    public void cerrar(){
-      this.dispose();
-}
+
+    public void cerrar() {
+        this.dispose();
+    }
 }

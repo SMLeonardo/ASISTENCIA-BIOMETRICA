@@ -373,7 +373,7 @@ public class R_Usuarios extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "LLene todos los campos", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
             String ins = "INSERT INTO USUARIO (USU_id,USU_usuario,USU_contraseña,USU_estado,TIPO_DE_USUARIO_TIPO_USER_id,EMPLEADO_EMPL_id) VALUES(?,?,?,?,?,?)";
-            String mostrar = "SELECT EMPL_id FROM EMPLEADO WHERE CONCAT(EMPL_nombres,'"+" "+"',EMPL_apellidos)='"+txtcod_empl.getSelectedItem().toString()+ "'";
+            String mostrar = "SELECT EMPL_id FROM EMPLEADO WHERE CONCAT(EMPL_nombres,'" + " " + "',EMPL_apellidos)='" + txtcod_empl.getSelectedItem().toString() + "'";
             try {
                 PreparedStatement pst = (PreparedStatement) cn.prepareStatement(ins);
                 pst.setInt(1, Integer.parseInt(txtcod.getText()));
@@ -381,22 +381,22 @@ public class R_Usuarios extends javax.swing.JInternalFrame {
                 pst.setString(3, new String(password.getPassword()));
                 pst.setString(4, "Activo");
                 if (cbo_jerarquia.getSelectedItem().toString().equals("Administrador")) {
-                pst.setInt(5, Integer.parseInt("1"));    
-                }else{
-                pst.setInt(5, Integer.parseInt("2"));    
+                    pst.setInt(5, Integer.parseInt("1"));
+                } else {
+                    pst.setInt(5, Integer.parseInt("2"));
                 }
- //////////////////////////////////////////////////////////////////////////////////////////////               
+                //////////////////////////////////////////////////////////////////////////////////////////////               
                 try {
-                Statement st = cn.createStatement();
+                    Statement st = cn.createStatement();
                     ResultSet rs = st.executeQuery(mostrar);
                     if (rs.next()) {
-                      pst.setInt(6,  Integer.parseInt(rs.getString("EMPL_id")));   
-                        
-            }
-            } catch (SQLException ex) {
-                Logger.getLogger(R_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                
+                        pst.setInt(6, Integer.parseInt(rs.getString("EMPL_id")));
+
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(R_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
 //                pst.setString(6, txtcod_empl.getSelectedItem().toString());
 ///////////////////////////////////////////////////////////////////////////////////////////////                
                 int n = pst.executeUpdate();
@@ -464,7 +464,7 @@ public class R_Usuarios extends javax.swing.JInternalFrame {
 
     private void txtuserKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtuserKeyTyped
         // TODO add your handling code here:
-      
+
     }//GEN-LAST:event_txtuserKeyTyped
 
     private void cbo_estadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_estadoActionPerformed
@@ -477,18 +477,18 @@ public class R_Usuarios extends javax.swing.JInternalFrame {
 
     private void txtcodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcodActionPerformed
         // TODO add your handling code here:
-       
-        
+
+
     }//GEN-LAST:event_txtcodActionPerformed
 
     private void txtuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtuserActionPerformed
-       
+
     }//GEN-LAST:event_txtuserActionPerformed
 
     private void txtuserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtuserKeyReleased
         // TODO add your handling code here:
-         if (evt.getKeyCode()==KeyEvent.VK_ENTER) {
-           password.requestFocus();// al presionar enter mandas el cursor al siguiente text 
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            password.requestFocus();// al presionar enter mandas el cursor al siguiente text 
         }
     }//GEN-LAST:event_txtuserKeyReleased
 
