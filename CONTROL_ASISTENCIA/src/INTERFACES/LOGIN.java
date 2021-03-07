@@ -307,6 +307,8 @@ String pass;
             usuario=rs.getString(1);
             
         }
+            rs.close();
+            st.close();
 //            System.out.println(""+usuario);
             if (usuario.equals("")) {
                 btnregistra.setEnabled(true);
@@ -346,6 +348,8 @@ String pass; IconError error=new IconError();MyIcon icon = new MyIcon();
             
            
         }
+            rs.close();
+            st.close();
    
         } catch (SQLException ex) {
          JOptionPane.showMessageDialog(null, ex, "Error de conexión", JOptionPane.ERROR_MESSAGE);  

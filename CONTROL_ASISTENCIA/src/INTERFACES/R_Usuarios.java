@@ -360,6 +360,8 @@ public class R_Usuarios extends javax.swing.JInternalFrame {
                     txtcod.setText("" + codigo);
                     System.out.println("" + codigo);
                 }
+                rs.close();
+                st.close();
             } catch (SQLException ex) {
                 Logger.getLogger(R_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -409,7 +411,7 @@ public class R_Usuarios extends javax.swing.JInternalFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "Registro Invalido", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
-
+                pst.close();
             } catch (SQLException ex) {
                 Logger.getLogger(R_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -528,7 +530,8 @@ public class R_Usuarios extends javax.swing.JInternalFrame {
                 listaE = Registros + " " + Registros1;
                 txtcod_empl.addItem(listaE);
             }
-
+            rs.close();
+            st.close();
         } catch (SQLException ex) {
             Logger.getLogger(R_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
         }

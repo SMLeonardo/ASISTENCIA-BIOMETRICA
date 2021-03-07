@@ -104,6 +104,8 @@ public class C_Empleados extends javax.swing.JInternalFrame {
                 Registros[7] = btn2;
                 model.addRow(Registros);
             }
+            rs.close();
+            st.close();
 // PASO LOS REGISTROS AL JTABEL1 
             jTable1.setModel(model);
 // DIMENSIONA EL ALTO DE LAS FILAS DEL JTABLE 
@@ -388,7 +390,8 @@ public class C_Empleados extends javax.swing.JInternalFrame {
                                 }
 
             }
-
+            rs.close();
+            st.close();
         } catch (SQLException ex) {
             Logger.getLogger(C_Empleados.class.getName()).log(Level.SEVERE, null, ex);
         }catch (IOException ex) {
@@ -410,7 +413,8 @@ public class C_Empleados extends javax.swing.JInternalFrame {
                 listaE = Registros + " " + Registros1;
 
             }
-
+            rs.close();
+            st.close();
         } catch (SQLException ex) {
             Logger.getLogger(R_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -426,7 +430,8 @@ public class C_Empleados extends javax.swing.JInternalFrame {
             if (rs.next()) {
                 Registros = rs.getString("CARGO_descripcion");
             }
-
+            rs.close();
+            st.close();
         } catch (SQLException ex) {
             Logger.getLogger(R_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
         }

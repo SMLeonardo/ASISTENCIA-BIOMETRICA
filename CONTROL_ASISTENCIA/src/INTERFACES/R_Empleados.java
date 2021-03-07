@@ -644,7 +644,7 @@ public class R_Empleados extends javax.swing.JInternalFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "Registro Invalido", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
-
+                pst.close();
             } catch (SQLException ex) {
                 Logger.getLogger(R_Empleados.class.getName()).log(Level.SEVERE, null, ex);
             } catch (FileNotFoundException ex) {

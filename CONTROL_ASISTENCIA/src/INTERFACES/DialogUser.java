@@ -348,6 +348,8 @@ public class DialogUser extends javax.swing.JDialog {
                     txtcod.setText("" + codigo);
                     System.out.println("" + codigo);
                 }
+                rs.close();
+                st.close();
             } catch (SQLException ex) {
                 Logger.getLogger(R_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -431,6 +433,8 @@ public class DialogUser extends javax.swing.JDialog {
                         pst.setInt(5, Integer.parseInt(rs.getString("EMPL_id")));
 
                     }
+                    st.close();
+                    rs.close();
                 } catch (SQLException ex) {
                     Logger.getLogger(R_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -440,7 +444,7 @@ public class DialogUser extends javax.swing.JDialog {
                 } else {
                     JOptionPane.showMessageDialog(this, "Registro Invalido", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
-
+                pst.close();
             } catch (SQLException ex) {
                 Logger.getLogger(R_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -533,7 +537,8 @@ void Empleados(String valor) {
                 listaE = Registros + " " + Registros1;
                 txtcod_empl.addItem(listaE);
             }
-
+            rs.close();
+            st.close();
         } catch (SQLException ex) {
             Logger.getLogger(R_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
