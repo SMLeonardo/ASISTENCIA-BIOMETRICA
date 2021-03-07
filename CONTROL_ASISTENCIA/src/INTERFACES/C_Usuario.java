@@ -14,6 +14,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -308,10 +309,23 @@ model.addColumn("Codigo");
 //                    activa_boton(false,true,false);
                 }
                 if (boton.getName().equals("e")) {
-                    JOptionPane.showConfirmDialog(this, "¿Esta seguro de realizar la accion?", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
-
+                    int confirmar = JOptionPane.showConfirmDialog(this, "¿Esta seguro?", "Alerta!", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+                    if(confirmar==0){
+                    String sql="DELETE FROM USUARIO WHERE USU_id='"+codigo+"'";
+                    try{
+                    PreparedStatement pst=cn.prepareStatement(sql);
+                    int n=pst.executeUpdate();
+                        if (n>0) {
+                            cargar("");
+                        }else{
+                            JOptionPane.showMessageDialog(this, "Algo Salio Mal", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }catch(SQLException ex){
+                      Logger.getLogger(C_Usuario.class.getName()).log(Level.SEVERE, null, ex);  
+                    }
                     //EVENTOS ELIMINAR
 //                    activa_boton(false,false,true);
+                }
                 }
             }
 

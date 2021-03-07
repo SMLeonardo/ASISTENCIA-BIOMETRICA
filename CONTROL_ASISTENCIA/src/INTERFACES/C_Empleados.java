@@ -17,6 +17,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -306,10 +307,37 @@ public class C_Empleados extends javax.swing.JInternalFrame {
 //                    activa_boton(false,true,false);
                 }
                 if (boton.getName().equals("e")) {
-                    JOptionPane.showConfirmDialog(this, "¿Esta seguro de realizar la accion?", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
-
+                    int confirmar = JOptionPane.showConfirmDialog(this, "¿Esta seguro?", "Alerta!", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+                    String id="";
+                    if(confirmar==0){
+                    try{
+                    String sql="SELECT EMPL_id FROM EMPLEADO WHERE EMPL_dni='"+codigo+"'";
+                    
+                    Statement st=cn.createStatement();
+                    ResultSet rs=st.executeQuery(sql);
+                        if (rs.next()) {
+                       id=rs.getString(1);
+                         try{
+                    String sql1="DELETE FROM EMPLEADO WHERE EMPL_id='"+id+"'";
+                    PreparedStatement pst=cn.prepareStatement(sql1);
+                    int n=pst.executeUpdate();
+                        if (n>0) {
+                         cargar("");   
+                        }else{
+                          JOptionPane.showMessageDialog(this, "Algo Salio Mal", "ERROR", JOptionPane.ERROR_MESSAGE);  
+                        }
+                    }catch(SQLException ex){
+                     Logger.getLogger(C_Empleados.class.getName()).log(Level.SEVERE, null, ex);   
+                    }
+                        }
+                    }catch(SQLException ex){
+                     Logger.getLogger(C_Empleados.class.getName()).log(Level.SEVERE, null, ex);   
+                    }
+                    
+                   
                     //EVENTOS ELIMINAR
 //                    activa_boton(false,false,true);
+                }
                 }
             }
 
