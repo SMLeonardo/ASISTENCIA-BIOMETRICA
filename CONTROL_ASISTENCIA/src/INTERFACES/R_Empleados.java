@@ -404,6 +404,7 @@ public class R_Empleados extends javax.swing.JInternalFrame {
 
         ftermino.setDateFormatString("dd/MM/yyyy");
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENES/hdigital.jpg"))); // NOI18N
         jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
