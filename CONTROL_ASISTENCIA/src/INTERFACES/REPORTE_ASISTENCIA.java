@@ -43,6 +43,9 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import static java.lang.Thread.sleep;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
@@ -69,6 +72,12 @@ Conexion cc = new Conexion();
      private File file;
     private List<JTable> tabla;
     private List<String> nom_files;
+    private boolean ban=true;
+    public boolean ban1=true;
+    public boolean ban2=true;
+    public  boolean ban3=true;
+    public static int indice=0;
+    public static int cont=0;
   
     /**
      * Creates new form REPORTE_ASISTENCIA
@@ -158,6 +167,9 @@ for (int i = 0; i < table.getColumnCount(); i++) {
 	    jtableHeader3.setDefaultRenderer(new GestionEncabezadoTabla());
 	    jTable3.setTableHeader(jtableHeader3);
             ////////////////////////////////////////////////////
+          //  Hora hora = new Hora();
+         //ban=true;
+//hora.start();
             
     }
      void cargar(String valor){
@@ -167,7 +179,7 @@ for (int i = 0; i < table.getColumnCount(); i++) {
    
 //    String []titulos={"Codigo","Usuario","Contraseña","Estado","Tipo Usuario","Empleado","Operaciones"};
 System.out.println("hola"+dni.getText());
-    Object []Registros=new Object[6];
+    Object []Registros=new Object[7];
      jTable1.setDefaultRenderer(Object.class, new Render());
          
         
@@ -179,6 +191,7 @@ System.out.println("hola"+dni.getText());
                 return false;
             };
               };
+    model.addColumn("ID");
 model.addColumn("HORA INGRESO");
 model.addColumn("HORA SALIDA");
 model.addColumn("DIA SEMANA");
@@ -221,16 +234,16 @@ model.addColumn("ELIMINAR");
               ResultSet rs = st.executeQuery(mostrar);
               while(rs.next())
               {
-                 
-                  Registros[0]= rs.getString(2);
-                  Registros[1]= rs.getString(3);
+                 Registros[0]= rs.getString(1);
+                  Registros[1]= rs.getString(2);
+                  Registros[2]= rs.getString(3);
                   //////////////////////////////////
                   String[] dias={"Lunes","Martes", "Miércoles","Jueves","Viernes","Sábado","Domingo"};
-                  Registros[2]= dias[Integer.parseInt(rs.getString(6))-1];
+                  Registros[3]= dias[Integer.parseInt(rs.getString(6))-1];
                   //////////////////////////////////
-                  Registros[3]= rs.getString(4); 
-                  Registros[4]=btn1;
-                  Registros[5]=btn2;
+                  Registros[4]= rs.getString(4); 
+                  Registros[5]=btn1;
+                  Registros[6]=btn2;
                   model.addRow(Registros);
               }
 // PASO LOS REGISTROS AL JTABEL1 
@@ -244,6 +257,7 @@ jTable1.getColumnModel().getColumn(0).setCellRenderer(tcr);
 jTable1.getColumnModel().getColumn(1).setCellRenderer(tcr);
 jTable1.getColumnModel().getColumn(2).setCellRenderer(tcr);
 jTable1.getColumnModel().getColumn(3).setCellRenderer(tcr);
+jTable1.getColumnModel().getColumn(4).setCellRenderer(tcr);
 //jTable1.getColumnModel().getColumn(4).setCellRenderer(tcr);
 //jTable1.getColumnModel().getColumn(5).setCellRenderer(tcr);
 // OTRA FORMA DE CENTRAR DATOS EN JTABLE
@@ -281,7 +295,7 @@ jTable1.getColumnModel().getColumn(3).setCellRenderer(tcr);
    
 //    String []titulos={"Codigo","Usuario","Contraseña","Estado","Tipo Usuario","Empleado","Operaciones"};
 System.out.println("hola"+dni.getText());
-    Object []Registros=new Object[8];
+    Object []Registros=new Object[9];
      jTable2.setDefaultRenderer(Object.class, new Render());
          
         
@@ -293,6 +307,7 @@ System.out.println("hola"+dni.getText());
                 return false;
             };
               };
+    model.addColumn("ID");
     model.addColumn("NOMBRE APELLIDO");
     model.addColumn("CARGO");
 model.addColumn("HORA INGRESO");
@@ -301,11 +316,16 @@ model.addColumn("DIA SEMANA");
 model.addColumn("FECHA");
 model.addColumn("EDITAR");
 model.addColumn("ELIMINAR");
+
         try {
-            
-             String mostrar="SELECT * FROM detalle_horario WHERE DETALL_HOR_observacion>='"+fecha_inicial.getText()+"' AND DETALL_HOR_observacion<= '"+fecha_final.getText()+"'";
-              Statement st = cn.createStatement();
+             SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
+             String mostrar="";
+         if(fecha_final.getDate()!=null){    
+              mostrar="SELECT * FROM detalle_horario WHERE DETALL_HOR_observacion>='"+formatoDelTexto.format(fecha_inicial.getDate())+"' AND DETALL_HOR_observacion<= '"+formatoDelTexto.format(fecha_final.getDate())+"'";
+         
+             Statement st = cn.createStatement();
               ResultSet rs = st.executeQuery(mostrar);
+         
               while(rs.next())
               {
                  ////////////////////////////////////////
@@ -313,18 +333,18 @@ model.addColumn("ELIMINAR");
                   String nom="";
             String ape="";
             String car="";
-            
+            Registros[0]= rs.getString(1);
          Statement st2 = cn.createStatement();
             ResultSet rs2=st2.executeQuery(SQL);
              while(rs2.next())
             { 
-            Registros[0]= rs2.getString(3)+" "+rs2.getString(4);
+            Registros[1]= rs2.getString(3)+" "+rs2.getString(4);
             SQL="SELECT * FROM cargo WHERE CARGO_id='"+rs2.getString(12)+"'";
              Statement st3 = cn.createStatement();
             ResultSet rs3=st3.executeQuery(SQL);
              while(rs3.next())
             {   
-                Registros[1]= rs3.getString(2);
+                Registros[2]= rs3.getString(2);
             }
             st3.close();
             rs3.close();
@@ -335,17 +355,18 @@ model.addColumn("ELIMINAR");
              rs2.close();
              st2.close();
                  //////////////////////////////////////// 
-                  Registros[2]= rs.getString(2);
-                  Registros[3]= rs.getString(3);
+                  Registros[3]= rs.getString(2);
+                  Registros[4]= rs.getString(3);
                   //////////////////////////////////
                   String[] dias={"Lunes","Martes", "Miércoles","Jueves","Viernes","Sábado","Domingo"};
-                  Registros[4]= dias[Integer.parseInt(rs.getString(6))-1];
+                  Registros[5]= dias[Integer.parseInt(rs.getString(6))-1];
                   //////////////////////////////////
-                  Registros[5]= rs.getString(4); 
-                  Registros[6]=btn1;
-                  Registros[7]=btn2;
+                  Registros[6]= rs.getString(4); 
+                  Registros[7]=btn1;
+                  Registros[8]=btn2;
                   model.addRow(Registros);
               }
+        }
 // PASO LOS REGISTROS AL JTABEL1 
               jTable2.setModel(model);
 // DIMENSIONA EL ANHO DE LAS FILAS DEL JTABLE 
@@ -359,6 +380,7 @@ jTable2.getColumnModel().getColumn(2).setCellRenderer(tcr);
 jTable2.getColumnModel().getColumn(3).setCellRenderer(tcr);
 jTable2.getColumnModel().getColumn(4).setCellRenderer(tcr);
 jTable2.getColumnModel().getColumn(5).setCellRenderer(tcr);
+jTable2.getColumnModel().getColumn(6).setCellRenderer(tcr);
 //jTable1.getColumnModel().getColumn(4).setCellRenderer(tcr);
 //jTable1.getColumnModel().getColumn(5).setCellRenderer(tcr);
 // OTRA FORMA DE CENTRAR DATOS EN JTABLE
@@ -390,13 +412,14 @@ jTable2.getColumnModel().getColumn(5).setCellRenderer(tcr);
   }
    
       void cargar3(String valor){
-         
+         cont++;
+          System.out.println("contador:  "+cont);
     DefaultTableModel model;
-    
+    //JOptionPane.showMessageDialog(null, "holaa");
    
 //    String []titulos={"Codigo","Usuario","Contraseña","Estado","Tipo Usuario","Empleado","Operaciones"};
 System.out.println("hola"+dni.getText());
-    Object []Registros=new Object[8];
+    Object []Registros=new Object[9];
      jTable3.setDefaultRenderer(Object.class, new Render());
          
         
@@ -408,6 +431,7 @@ System.out.println("hola"+dni.getText());
                 return false;
             };
               };
+    model.addColumn("ID");
     model.addColumn("NOMBRE APELLIDO");
     model.addColumn("CARGO");
 model.addColumn("HORA INGRESO");
@@ -429,7 +453,9 @@ model.addColumn("ELIMINAR");
              id_cargo[3][1]="4";
              id_cargo[4][1]="5";
              String id_cargo_actual="";
+             indice=cargo.getSelectedIndex();
              for (int i = 0; i < 5; i++) {
+                 System.out.println("id_cargo: "+id_cargo[i][0]+"   "+cargo.getItemAt(cargo.getSelectedIndex())+"     "+indice);
                 if(id_cargo[i][0].equals(cargo.getItemAt(cargo.getSelectedIndex()))){
                 id_cargo_actual=id_cargo[i][1];
                 }
@@ -447,6 +473,7 @@ model.addColumn("ELIMINAR");
               ResultSet rs = st.executeQuery(mostrar);
               while(rs.next())
               {
+                  Registros[0]= rs.getString(1);
                  ////////////////////////////////////////
                    String SQL="SELECT * FROM empleado WHERE EMPL_id='"+rs.getString(5)+"'";
                   String nom="";
@@ -457,13 +484,14 @@ model.addColumn("ELIMINAR");
             ResultSet rs2=st2.executeQuery(SQL);
              while(rs2.next())
             { 
-            Registros[0]= rs2.getString(3)+" "+rs2.getString(4);
+                
+            Registros[1]= rs2.getString(3)+" "+rs2.getString(4);
             SQL="SELECT * FROM cargo WHERE CARGO_id='"+rs2.getString(12)+"'";
              Statement st3 = cn.createStatement();
             ResultSet rs3=st3.executeQuery(SQL);
              while(rs3.next())
             {   
-                Registros[1]= rs3.getString(2);
+                Registros[2]= rs3.getString(2);
             }
             st3.close();
             rs3.close();
@@ -474,15 +502,15 @@ model.addColumn("ELIMINAR");
              rs2.close();
              st2.close();
                  //////////////////////////////////////// 
-                  Registros[2]= rs.getString(2);
-                  Registros[3]= rs.getString(3);
+                  Registros[3]= rs.getString(2);
+                  Registros[4]= rs.getString(3);
                   //////////////////////////////////
                   String[] dias={"Lunes","Martes", "Miércoles","Jueves","Viernes","Sábado","Domingo"};
-                  Registros[4]= dias[Integer.parseInt(rs.getString(6))-1];
+                  Registros[5]= dias[Integer.parseInt(rs.getString(6))-1];
                   //////////////////////////////////
-                  Registros[5]= rs.getString(4); 
-                  Registros[6]=btn1;
-                  Registros[7]=btn2;
+                  Registros[6]= rs.getString(4); 
+                  Registros[7]=btn1;
+                  Registros[8]=btn2;
                   model.addRow(Registros);
               }
         /////////////////////
@@ -502,6 +530,7 @@ jTable3.getColumnModel().getColumn(2).setCellRenderer(tcr);
 jTable3.getColumnModel().getColumn(3).setCellRenderer(tcr);
 jTable3.getColumnModel().getColumn(4).setCellRenderer(tcr);
 jTable3.getColumnModel().getColumn(5).setCellRenderer(tcr);
+jTable3.getColumnModel().getColumn(6).setCellRenderer(tcr);
 //jTable1.getColumnModel().getColumn(4).setCellRenderer(tcr);
 //jTable1.getColumnModel().getColumn(5).setCellRenderer(tcr);
 // OTRA FORMA DE CENTRAR DATOS EN JTABLE
@@ -557,11 +586,11 @@ jTable3.getColumnModel().getColumn(5).setCellRenderer(tcr);
         cargo1 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        fecha_inicial = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
-        fecha_final = new javax.swing.JFormattedTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        fecha_final = new com.toedter.calendar.JDateChooser();
+        fecha_inicial = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         cargo = new javax.swing.JComboBox<>();
@@ -570,6 +599,19 @@ jTable3.getColumnModel().getColumn(5).setCellRenderer(tcr);
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+                formWindowLostFocus(evt);
+            }
+        });
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CONTROL DE ASISTENCIA DEL PERSONAL", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century", 1, 14))); // NOI18N
@@ -606,6 +648,11 @@ jTable3.getColumnModel().getColumn(5).setCellRenderer(tcr);
                 "HORA INGRESO", "HORA SALIDA", "DIA SEMANA", "FECHA"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel2.setText("Nombre:");
@@ -681,28 +728,7 @@ jTable3.getColumnModel().getColumn(5).setCellRenderer(tcr);
 
         jLabel5.setText("Fecha Inicial:");
 
-        try {
-            fecha_inicial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        fecha_inicial.setText("21/02/2021");
-
         jLabel6.setText("Fecha Final:");
-
-        try {
-            fecha_final.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        fecha_final.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                fecha_finalKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                fecha_finalKeyReleased(evt);
-            }
-        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -715,7 +741,30 @@ jTable3.getColumnModel().getColumn(5).setCellRenderer(tcr);
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
+
+        fecha_final.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                fecha_finalHierarchyChanged(evt);
+            }
+        });
+        fecha_final.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                fecha_finalPropertyChange(evt);
+            }
+        });
+        fecha_final.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                fecha_finalInputMethodTextChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -727,12 +776,12 @@ jTable3.getColumnModel().getColumn(5).setCellRenderer(tcr);
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 979, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(fecha_inicial, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(fecha_inicial, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(fecha_final, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fecha_final, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -741,19 +790,23 @@ jTable3.getColumnModel().getColumn(5).setCellRenderer(tcr);
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(fecha_inicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6)
-                        .addComponent(fecha_final, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5))
-                .addGap(28, 28, 28)
+                    .addComponent(jLabel6)
+                    .addComponent(fecha_final, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(fecha_inicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("         FECHA         ", jPanel3);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPanel4FocusGained(evt);
+            }
+        });
 
         jLabel7.setText("Cargo:");
 
@@ -775,6 +828,11 @@ jTable3.getColumnModel().getColumn(5).setCellRenderer(tcr);
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable3);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -888,28 +946,6 @@ jTable3.getColumnModel().getColumn(5).setCellRenderer(tcr);
         // TODO add your handling code here:
     }//GEN-LAST:event_dniActionPerformed
 
-    private void fecha_finalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fecha_finalKeyPressed
-        // TODO add your handling code here:
-        
-        
-        
-        
-        
-    }//GEN-LAST:event_fecha_finalKeyPressed
-
-    private void fecha_finalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fecha_finalKeyReleased
-        // TODO add your handling code here:
-        
-        if(!fecha_final.getText().substring(6, 10).equals("    ")){
-            
-        if(Integer.parseInt(fecha_final.getText().substring(6, 10).replaceAll(" ", ""))>1000){
-            //JOptionPane.showMessageDialog(null, "hola"+fecha_final.getText().substring(6, 10));
-        cargar2("");
-        }
-        
-        }
-    }//GEN-LAST:event_fecha_finalKeyReleased
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
          // TODO add your handling code here:
@@ -950,14 +986,276 @@ jTable3.getColumnModel().getColumn(5).setCellRenderer(tcr);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    
     private void cargoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cargoItemStateChanged
         // TODO add your handling code here:
         //JOptionPane.showMessageDialog(null, "HOLA");
         
         cargar3("");
-        
+      
     }//GEN-LAST:event_cargoItemStateChanged
- /**
+
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+        // TODO add your handling code here:
+        clic_tabla = this.jTable3.rowAtPoint(evt.getPoint());
+
+        String codigo = jTable3.getValueAt(clic_tabla, 0).toString();
+       
+//        String nombre = ""+tabla.getValueAt(clic_tabla, 1);
+//        double precio = (double)tabla.getValueAt(clic_tabla, 2);
+//        String marca = ""+tabla.getValueAt(clic_tabla, 3);
+
+//        txtCodigo.setText(String.valueOf(codigo));
+//        txtNombre.setText(nombre);
+//        txtPrecio.setText(String.valueOf(precio));
+//        txtMarca.setText(marca);
+        int column = jTable3.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / jTable3.getRowHeight();
+
+        if (row < jTable3.getRowCount() && row >= 0 && column < jTable3.getColumnCount() && column >= 0) {
+            Object value = jTable3.getValueAt(row, column);
+            if (value instanceof JButton) {
+                ((JButton) value).doClick();
+                JButton boton = (JButton) value;
+
+                if (boton.getName().equals("m")) {
+
+                    DialogDetalleHorario u = new DialogDetalleHorario(null, true);
+                    //JOptionPane.showMessageDialog(null,""+codigo);
+                    pasarDatos(codigo);
+                    u.setVisible(true);
+
+                    //EVENTOS MODIFICAR
+//                    activa_boton(false,true,false);
+                }
+                if (boton.getName().equals("e")) {
+                   int elimina= JOptionPane.showConfirmDialog(this, "¿Esta seguro de realizar la accion?", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
+                    //JOptionPane.showMessageDialog(null, elimina);
+                    if(elimina==0){
+                     String sql = "Delete from detalle_horario where DETALL_HOR_id = ?";
+        
+       PreparedStatement ps;
+                       try {
+                           ps = (PreparedStatement) cn.prepareStatement(sql);
+                           int cod= Integer.parseInt(""+codigo);
+        ps.setInt(1,cod);
+        int n = ps.executeUpdate();
+        if(n>0){
+        JOptionPane.showMessageDialog(this, "Registro Eliminado con Exito", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        }
+                       } catch (SQLException ex) {
+                           Logger.getLogger(REPORTE_ASISTENCIA.class.getName()).log(Level.SEVERE, null, ex);
+                       }
+       
+                    }
+                    //EVENTOS ELIMINAR
+//                    activa_boton(false,false,true);
+                }
+            }
+
+        }
+    }//GEN-LAST:event_jTable3MouseClicked
+
+    /*public class Hora extends Thread{
+  public void run(){
+   while(ban==true){
+   
+       try {
+           Calendar calendario = Calendar.getInstance();
+           int hora, minutos, segundos;
+           hora =calendario.get(Calendar.HOUR_OF_DAY);
+           minutos = calendario.get(Calendar.MINUTE);
+           segundos = calendario.get(Calendar.SECOND);
+          // lb_hora.setText(hora+":"+minutos+":"+segundos);
+           
+           if(ban3==false){
+               System.out.println("ban3:  "+ban3+"  "+cargo.getItemAt(cargo.getSelectedIndex())+"   "+indice);
+               cargo.setSelectedIndex(indice);
+           cargar3("");
+           //ban3=true;
+           }
+           sleep(1000);
+       } catch (InterruptedException ex) {
+           Logger.getLogger(REGISTRO_ASISTENCIA_PERSONAL.class.getName()).log(Level.SEVERE, null, ex);
+       }
+   }
+  }
+}*/
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+        // TODO add your handling code here:
+        
+                
+    }//GEN-LAST:event_formFocusGained
+
+    private void jPanel4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel4FocusGained
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jPanel4FocusGained
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+      
+         
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
+       
+    }//GEN-LAST:event_formWindowLostFocus
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // TODO add your handling code here:
+         // TODO add your handling code here:
+        clic_tabla = this.jTable2.rowAtPoint(evt.getPoint());
+
+        String codigo = jTable2.getValueAt(clic_tabla, 0).toString();
+       
+//        String nombre = ""+tabla.getValueAt(clic_tabla, 1);
+//        double precio = (double)tabla.getValueAt(clic_tabla, 2);
+//        String marca = ""+tabla.getValueAt(clic_tabla, 3);
+
+//        txtCodigo.setText(String.valueOf(codigo));
+//        txtNombre.setText(nombre);
+//        txtPrecio.setText(String.valueOf(precio));
+//        txtMarca.setText(marca);
+        int column = jTable2.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / jTable2.getRowHeight();
+
+        if (row < jTable2.getRowCount() && row >= 0 && column < jTable2.getColumnCount() && column >= 0) {
+            Object value = jTable2.getValueAt(row, column);
+            if (value instanceof JButton) {
+                ((JButton) value).doClick();
+                JButton boton = (JButton) value;
+
+                if (boton.getName().equals("m")) {
+
+                    DialogDetalleHorario u = new DialogDetalleHorario(null, true);
+                    //JOptionPane.showMessageDialog(null,""+codigo);
+                    pasarDatos(codigo);
+                    u.setVisible(true);
+
+                    //EVENTOS MODIFICAR
+//                    activa_boton(false,true,false);
+                }
+                if (boton.getName().equals("e")) {
+                    JOptionPane.showConfirmDialog(this, "¿Esta seguro de realizar la accion?", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
+
+                    //EVENTOS ELIMINAR
+//                    activa_boton(false,false,true);
+                }
+            }
+
+        }
+    }//GEN-LAST:event_jTable2MouseClicked
+
+    private void fecha_finalInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_fecha_finalInputMethodTextChanged
+        // TODO add your handling code here:
+       
+          
+
+        
+    }//GEN-LAST:event_fecha_finalInputMethodTextChanged
+
+    private void fecha_finalHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_fecha_finalHierarchyChanged
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_fecha_finalHierarchyChanged
+
+    private void fecha_finalPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_fecha_finalPropertyChange
+        // TODO add your handling code here:
+         SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
+         String ff="";
+         if(fecha_final.getDate()!=null){
+          ff=formatoDelTexto.format(fecha_final.getDate());
+         }
+         if(ff != ""){
+
+            if(Integer.parseInt(formatoDelTexto.format(fecha_final.getDate()).substring(6, 10).replaceAll(" ", ""))>1000){
+                //JOptionPane.showMessageDialog(null, "hola"+fecha_final.getText().substring(6, 10));
+                cargar2("");
+            }
+
+        }
+    }//GEN-LAST:event_fecha_finalPropertyChange
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+         // TODO add your handling code here:
+         // TODO add your handling code here:
+        clic_tabla = this.jTable1.rowAtPoint(evt.getPoint());
+
+        String codigo = jTable1.getValueAt(clic_tabla, 0).toString();
+       
+//        String nombre = ""+tabla.getValueAt(clic_tabla, 1);
+//        double precio = (double)tabla.getValueAt(clic_tabla, 2);
+//        String marca = ""+tabla.getValueAt(clic_tabla, 3);
+
+//        txtCodigo.setText(String.valueOf(codigo));
+//        txtNombre.setText(nombre);
+//        txtPrecio.setText(String.valueOf(precio));
+//        txtMarca.setText(marca);
+        int column = jTable1.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / jTable1.getRowHeight();
+
+        if (row < jTable1.getRowCount() && row >= 0 && column < jTable1.getColumnCount() && column >= 0) {
+            Object value = jTable1.getValueAt(row, column);
+            if (value instanceof JButton) {
+                ((JButton) value).doClick();
+                JButton boton = (JButton) value;
+
+                if (boton.getName().equals("m")) {
+
+                    DialogDetalleHorario u = new DialogDetalleHorario(null, true);
+                    //JOptionPane.showMessageDialog(null,""+codigo);
+                    pasarDatos(codigo);
+                    u.setVisible(true);
+
+                    //EVENTOS MODIFICAR
+//                    activa_boton(false,true,false);
+                }
+                if (boton.getName().equals("e")) {
+                    JOptionPane.showConfirmDialog(this, "¿Esta seguro de realizar la accion?", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
+//Delete from empleado where cedula = ?
+                    //EVENTOS ELIMINAR
+//                    activa_boton(false,false,true);
+                }
+            }
+
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+  public void pasarDatos(String cod) {
+      
+        String sql = "select * from detalle_horario where DETALL_HOR_id='" + cod + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                
+                DialogDetalleHorario.codi.setText(rs.getString(1));
+                DialogDetalleHorario.h_salida.setText(rs.getString(3).replaceAll(":", ""));
+                DialogDetalleHorario.h_ingreso.setText(rs.getString(2).replaceAll(":", ""));
+                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+                String ff= rs.getString(4).replaceAll("/", "");
+                ff=ff.substring(4, 8)+"-"+ff.substring(2, 4)+"-"+ff.substring(0, 2);
+               
+                try {
+                    DialogDetalleHorario.fecha.setDate(formatoDelTexto.parse(ff));
+                    //DialogDetalleHorario.txtuser.setText(rs.getString("USU_usuario"));
+                    //DialogDetalleHorario.password.setText(rs.getString("USU_contraseña"));
+                    // DialogUser.cbo_jerarquia.setSelectedItem(Jerarquia(rs.getString("TIPO_DE_USUARIO_TIPO_USER_id")));
+                    //DialogDetalleHorario.cbo_estado.setSelectedItem(rs.getString("USU_estado"));
+                    //DialogUser.txtcod_empl.setSelectedItem(Empleados(rs.getString("EMPLEADO_EMPL_id")));
+                } catch (ParseException ex) {
+                    Logger.getLogger(REPORTE_ASISTENCIA.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(R_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -994,11 +1292,11 @@ jTable3.getColumnModel().getColumn(5).setCellRenderer(tcr);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellido1;
-    private javax.swing.JComboBox<String> cargo;
+    public static javax.swing.JComboBox<String> cargo;
     private javax.swing.JTextField cargo1;
     public static javax.swing.JTextField dni;
-    private javax.swing.JFormattedTextField fecha_final;
-    private javax.swing.JFormattedTextField fecha_inicial;
+    private com.toedter.calendar.JDateChooser fecha_final;
+    private com.toedter.calendar.JDateChooser fecha_inicial;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -1016,9 +1314,9 @@ jTable3.getColumnModel().getColumn(5).setCellRenderer(tcr);
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
+    public static javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
+    public javax.swing.JTable jTable3;
     private javax.swing.JTextField nombre1;
     // End of variables declaration//GEN-END:variables
 }
