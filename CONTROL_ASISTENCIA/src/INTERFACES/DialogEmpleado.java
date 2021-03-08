@@ -519,7 +519,7 @@ public class DialogEmpleado extends javax.swing.JDialog {
                 } else {
                     JOptionPane.showMessageDialog(this, "Registro Invalido", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
-
+                pst.close();
             } catch (SQLException ex) {
                 Logger.getLogger(DialogEmpleado.class.getName()).log(Level.SEVERE, null, ex);
             } catch (FileNotFoundException ex) {

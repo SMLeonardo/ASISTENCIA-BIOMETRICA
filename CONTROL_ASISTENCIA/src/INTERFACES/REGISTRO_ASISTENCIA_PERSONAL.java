@@ -226,7 +226,7 @@ hora.start();
             rs2.close();
             ////////////////////////////
             String f=dia+"/"+mes+"/"+anio;
-            SQL="SELECT * FROM detalle_horario WHERE EMPLEADOS_EMPL_dni='"+c+"' AND DETALL_HOR_observacion='"+f+"'";   
+            SQL="SELECT * FROM detalle_horario WHERE EMPLEADO_EMPL_id='"+c+"' AND DETALL_HOR_observacion='"+f+"'";   
             int ban_salida=0;
          Statement stt = cn.createStatement();
             ResultSet rst=stt.executeQuery(SQL);
@@ -240,7 +240,7 @@ hora.start();
             rst.close();
             ////////////////////////////
             System.out.println("contador:  "+con);
-             String sql="INSERT INTO detalle_horario (DETALL_HOR_id,DETALL_HOR_Hingreso,DETALL_HOR_Hsalida,DETALL_HOR_observacion,EMPLEADOS_EMPL_dni,HORARIO_HORARIO_id)" +"VALUES (?,?,?,?,?,?)";
+             String sql="INSERT INTO detalle_horario (DETALL_HOR_id,DETALL_HOR_Hingreso,DETALL_HOR_Hsalida,DETALL_HOR_observacion,EMPLEADO_EMPL_id,HORARIO_HORARIO_id)" +"VALUES (?,?,?,?,?,?)";
             PreparedStatement pst = cn.prepareStatement(sql);
                 
                 pst.setInt(1, con+1);
@@ -255,7 +255,7 @@ hora.start();
                 if(ban_salida!=0){
                     /////////////////////////////////conprobando que no haya registrado salida antes
                     f=dia+"/"+mes+"/"+anio;
-            SQL="SELECT * FROM detalle_horario WHERE EMPLEADOS_EMPL_dni='"+c+"' AND DETALL_HOR_observacion='"+f+"'";   
+            SQL="SELECT * FROM detalle_horario WHERE EMPLEADO_EMPL_id='"+c+"' AND DETALL_HOR_observacion='"+f+"'";   
             String ban_salida2="";
          Statement stt2 = cn.createStatement();
             ResultSet rst2=stt2.executeQuery(SQL);
